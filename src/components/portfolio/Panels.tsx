@@ -49,10 +49,17 @@ function GitHubIcon({ className }: { className?: string }) {
 }
 
 const PROJECT_REPO_LINKS = {
+  recipeKitchen: "https://github.com/JaredAung/recipe-kitchen",
   howToKeepPlantsAlive: "https://github.com/JaredAung/HowToNotKillYourPlants",
+  chicoChatbot: "https://github.com/JaredAung/CSUChico-WildcatAIConcierge",
   gaitorGate: "https://github.com/JaredAung/GaitorGate",
   board2Board: "https://github.com/JaredAung/Board2Board",
 } as const;
+
+const RECIPE_KITCHEN_SITE_URL = "https://recipe-kitchen-three.vercel.app";
+
+const CHICO_PRESENTATION_URL =
+  "https://docs.google.com/presentation/d/1-xGFHWhQPWJChK28VDnuPmtdYMDk_HnO/edit?slide=id.p1#slide=id.p1";
 
 function parseInlineBold(text: string): ReactNode {
   if (!/<b>[\s\S]*?<\/b>/i.test(text)) {
@@ -83,22 +90,43 @@ function parseInlineBold(text: string): ReactNode {
   return out.length === 0 ? text : out;
 }
 
-const OUTAMATION_BULLETS = [
-  "Built an <b>end-to-end document intelligence pipeline</b> that classifies and extracts structured data from mortgages, invoices, and contracts using <b>Tesseract, PaddleOCR, and EasyOCR</b> for RAG workflows.",
-  "Benchmarked layout-aware parsing techniques across document formats, identifying <b>OCR–LLM combinations</b> that improved extraction efficiency and accuracy on multi-column and table-heavy layouts.",
+const SWE_TA_BULLETS = [
+  "Mentor <b>48 undergraduate students</b> across multiple teams in designing, developing, and deploying full-stack senior capstone projects.",
+  "Lead hands-on workshops on <b>GitHub, CI/CD, AWS, and Vercel</b> to help teams ship reliable, production-ready applications.",
+  "Review student code and provide technical feedback on <b>APIs, database integration, authentication, deployment, and software engineering practices</b>.",
+] as const;
+
+const DEVELOP_FOR_GOOD_BULLETS = [
+  "Collaborated cross-functionally with designers, software engineers, and clients in an <b>Agile environment</b> to transform <b>30+ Figma designs</b> into reusable React Native components and production-ready screens.",
+  "Engineered backend for authentication, goal management, and weekly streak services with <b>Firebase</b> for a React Native platform that can support <b>300+ end users</b> (consumers and staff) following UserTesting validation.",
+  "Implemented <b>role-based authorization</b> using Firebase Authentication, Firestore Security Rules, Zod validation, and AsyncStorage, preventing unauthorized access while avoiding the need for higher-tier Firebase features.",
+  "Documented developer-friendly <b>WCAG accessibility guidelines</b> and audited code to follow the guidelines, creating an accessible platform that can be used by screen readers on both Android and iOS.",
+] as const;
+
+const RECIPE_KITCHEN_BULLETS = [
+  "Built a multimodal recipe extraction pipeline that turns short-form cooking reels into structured ingredient lists and steps by fusing <b>speech (including Burmese)</b>, <b>on-screen captions</b>, and <b>visual frame understanding</b>.",
+  "Orchestrated ingestion and generation with <b>LangGraph</b>, <b>Google Gemini</b>, and <b>Silero VAD</b>, tagging each ingredient and step with its source (audio, caption, or visual) for transparent recipe cards.",
+  "Shipped a full-stack product with a <b>FastAPI</b> backend, <b>Supabase</b> auth/storage, and a TypeScript frontend, deployed to <b>Vercel</b>.",
+  "Designed an async <b>jobs + worker</b> system where the API enqueues job IDs on <b>Amazon SQS</b> and ECS workers claim, run, and complete ingest/recipe/audio/visual pipelines without blocking requests.",
+  "Automated CI/CD with <b>GitHub Actions</b>: Docker images are built and pushed to <b>Amazon ECR</b>, then the API and worker services are deployed to <b>Amazon ECS</b> on successful main-branch builds.",
 ] as const;
 
 const PLANT_PROJECT_BULLETS = [
-  "Engineered a <b>two-tower recommendation system</b> using <b>Feast-backed features</b> and <b>holdout-based offline evaluation</b>, <b>outperforming a cosine-similarity baseline by 6.6× on Recall@10, 3.8× on NDCG@10, and 4× on Hit@10</b>, while <b>reducing inference latency from 63.7ms to 2.2ms</b>.",
-  "Developed a <b>LangGraph multi-agent system</b> for plant Q&A, side-by-side comparison, exploring recommendations, and <b>live web search via Tavily</b>, supported by a <b>hybrid RAG pipeline</b> with <b>cosine similarity</b>, <b>BM25 reranking</b>, and recursive/sliding window chunking.",
-  "Designed a <b>synthetic data generation framework</b> that simulated user–plant interactions for training and evaluation in a data-scarce domain, <b>successfully capturing 8 out of 10 target behavioral patterns</b>.",
-  "Containerized the <b>FastAPI</b> backend with <b>Docker</b> and <b>deployed on Railway and Vercel</b>, <b>serving a catalogue of 1000+ plants</b>.",
+  "Engineered a <b>two-tower recommendation system</b> that recommends plants based on users’ environment and preferences, improving <b>Recall@10 by 6.6×</b> over a semantic similarity baseline.",
+  "Designed a <b>rule-based simulation framework</b> to generate synthetic plant–user interaction data and benchmark the recommendation model’s ability to learn behavioral patterns, successfully capturing <b>8 of 10 predefined rules</b>.",
+  "Developed <b>LangGraph AI agents</b> capable of plant Q&A and comparisons, using a <b>hybrid RAG pipeline</b> of Pinecone vector search and BM25 retrieval over curated botany datasets.",
+] as const;
+
+const CHICO_CHATBOT_BULLETS = [
+  "Selected as <b>1 of 100 participants from 1,000+ CSU applicants</b> for the DxHub AI Summer Camp and assigned to a team developing an AI chatbot for Chico State University stakeholders.",
+  "Engineered a production <b>Retrieval-Augmented Generation (RAG)</b> system within the AWS ecosystem by building a knowledge base from <b>230+ university and local business webpages</b>, enabling transparent responses with inline citations and source references.",
+  "Developed a serverless backend using <b>AWS Lambda</b> and <b>API Gateway</b> to orchestrate user requests and perform LLM inference with <b>Amazon Bedrock Claude Sonnet</b>, supporting English/Spanish queries for <b>500+ daily users</b>.",
 ] as const;
 
 const GAITORGATE_BULLETS = [
-  "<b>Led a team of 6</b> to develop a search platform for <b>100+ AI tools</b> using keyword or NLP-based search, <b>winning 1st place out of 12 teams in a software engineering competition</b>.",
-  "Designed and optimized a <b>relational database schema</b> and <b>search pipeline</b> using <b>SQL</b>, <b>enabling natural language queries with ~0.4s average latency</b>.",
-  "Collaborated cross-functionally with designers, frontend and backend engineers, and QA in an <b>Agile environment to improve team productivity and workflow efficiency</b>.",
+  "Led a team of <b>6</b> over a 4-month period to develop and deploy a production-grade search platform for <b>200+ AI tools</b>, <b>winning 1st place out of 12 teams</b> in a software engineering competition.",
+  "Architected a <b>14-table relational MySQL database</b> and search pipeline supporting ~190 AI tools and <b>500+ keywords</b>, implementing FULLTEXT and foreign-key indexes for efficient search and data retrieval.",
+  "Developed <b>Flask API endpoints</b> for authentication, query execution, and user-uploaded tool ingestion, validating system reliability through <b>20+ student testers</b>.",
 ] as const;
 
 const BOARD2BOARD_BULLETS = [
@@ -111,10 +139,14 @@ function ProjectTitleWithRepo({
   title,
   description,
   repoHref,
+  presentationHref,
+  siteHref,
 }: {
   title: string;
   description: string;
   repoHref: string;
+  presentationHref?: string;
+  siteHref?: string;
 }) {
   return (
     <div className="flex flex-wrap items-baseline justify-between gap-x-3 gap-y-1">
@@ -122,25 +154,49 @@ function ProjectTitleWithRepo({
         <span className="font-normal">{title}:</span>{" "}
         <span className="font-semibold">{description}</span>
       </h3>
-      {repoHref ? (
-        <a
-          href={repoHref}
-          className={projectRepoLinkClass}
-          rel="noopener noreferrer"
-          target="_blank"
-          aria-label={`${title}: view repository on GitHub (opens in new tab)`}
-        >
-          <GitHubIcon className="h-4 w-4 opacity-90" />
-          GitHub
-        </a>
-      ) : (
-        <span
-          className="shrink-0 text-base text-slate-400 dark:text-slate-500"
-          title="Add URL in PROJECT_REPO_LINKS"
-        >
-          GitHub
-        </span>
-      )}
+      <div className="flex shrink-0 flex-wrap items-center gap-2">
+        {siteHref ? (
+          <a
+            href={siteHref}
+            className={projectRepoLinkClass}
+            rel="noopener noreferrer"
+            target="_blank"
+            aria-label={`${title}: view live site (opens in new tab)`}
+          >
+            Live site
+          </a>
+        ) : null}
+        {presentationHref ? (
+          <a
+            href={presentationHref}
+            className={projectRepoLinkClass}
+            rel="noopener noreferrer"
+            target="_blank"
+            aria-label={`${title}: view presentation (opens in new tab)`}
+          >
+            Presentation
+          </a>
+        ) : null}
+        {repoHref ? (
+          <a
+            href={repoHref}
+            className={projectRepoLinkClass}
+            rel="noopener noreferrer"
+            target="_blank"
+            aria-label={`${title}: view repository on GitHub (opens in new tab)`}
+          >
+            <GitHubIcon className="h-4 w-4 opacity-90" />
+            GitHub
+          </a>
+        ) : (
+          <span
+            className="shrink-0 text-base text-slate-400 dark:text-slate-500"
+            title="Add URL in PROJECT_REPO_LINKS"
+          >
+            GitHub
+          </span>
+        )}
+      </div>
     </div>
   );
 }
@@ -273,17 +329,37 @@ export function EducationCertificatesPanel() {
 
 function professionalInner() {
   return (
-    <article>
-      <header className="flex flex-col gap-1 sm:flex-row sm:flex-wrap sm:items-baseline sm:justify-between sm:gap-x-4">
-        <h3 className="text-lg font-medium text-slate-900 dark:text-slate-100">
-          AI Engineering Extern — Outamation
-        </h3>
-        <p className="shrink-0 text-base text-slate-500 dark:text-slate-500">
-          March 2026 – Present
-        </p>
-      </header>
-      <BulletList items={OUTAMATION_BULLETS} />
-    </article>
+    <>
+      <article>
+        <header className="flex flex-col gap-1 sm:flex-row sm:flex-wrap sm:items-baseline sm:justify-between sm:gap-x-4">
+          <h3 className="text-lg font-medium text-slate-900 dark:text-slate-100">
+            SWE Teaching Assistant — San Francisco State University
+          </h3>
+          <p className="shrink-0 text-base text-slate-500 dark:text-slate-500">
+            September 2026 – Present
+          </p>
+        </header>
+        <BulletList items={SWE_TA_BULLETS} />
+      </article>
+
+      <article>
+        <header className="flex flex-col gap-1 sm:flex-row sm:flex-wrap sm:items-baseline sm:justify-between sm:gap-x-4">
+          <h3 className="text-lg font-medium text-slate-900 dark:text-slate-100">
+            Full-Stack Engineer — Develop for Good
+          </h3>
+          <p className="shrink-0 text-base text-slate-500 dark:text-slate-500">
+            May 2026 – Present
+          </p>
+        </header>
+        <div className={projectMeta}>
+          <p>
+            <span className={projectMetaLabel}>Tech stack:</span> Firebase /
+            Firestore, React Native (Expo), TypeScript, Zod, Jest, GitHub Actions
+          </p>
+        </div>
+        <BulletList items={DEVELOP_FOR_GOOD_BULLETS} />
+      </article>
+    </>
   );
 }
 
@@ -351,6 +427,23 @@ function projectsSubsections() {
     <>
       <div className={contentSubsection}>
         <ProjectTitleWithRepo
+          repoHref={PROJECT_REPO_LINKS.recipeKitchen}
+          siteHref={RECIPE_KITCHEN_SITE_URL}
+          title="Recipe Kitchen"
+          description="Multimodal Reel-to-Recipe Platform"
+        />
+        <div className={projectMeta}>
+          <p>
+            <span className={projectMetaLabel}>Tech stack:</span> LangGraph,
+            Google Gemini, FastAPI, Python, TypeScript, Supabase, Silero VAD,
+            Apify, Amazon SQS, AWS ECS, Amazon ECR, GitHub Actions, Vercel
+          </p>
+        </div>
+        <BulletList items={RECIPE_KITCHEN_BULLETS} />
+      </div>
+
+      <div className={contentSubsection}>
+        <ProjectTitleWithRepo
           repoHref={PROJECT_REPO_LINKS.howToKeepPlantsAlive}
           title="HowToKeepPlantsAlive"
           description="AI Plant Recommendation System & Care Platform"
@@ -358,11 +451,28 @@ function projectsSubsections() {
         <div className={projectMeta}>
           <p>
             <span className={projectMetaLabel}>Tech stack:</span> LangGraph,
-            PyTorch, Python, MongoDB, Gemini LLM, Voyage AI, Cohere Reranker,
-            DVC, Prefect, MLFlow, Pinecone
+            PyTorch, Python, MongoDB, Gemini, Cohere, DVC, Prefect, MLFlow,
+            Pinecone, Feast, TypeScript
           </p>
         </div>
         <BulletList items={PLANT_PROJECT_BULLETS} />
+      </div>
+
+      <div className={contentSubsection}>
+        <ProjectTitleWithRepo
+          repoHref={PROJECT_REPO_LINKS.chicoChatbot}
+          presentationHref={CHICO_PRESENTATION_URL}
+          title="Chico State University Chatbot"
+          description="DxHub AI Summer Camp at Cal Poly San Luis Obispo"
+        />
+        <div className={projectMeta}>
+          <p>
+            <span className={projectMetaLabel}>Tech stack:</span> Node.js, AWS
+            Bedrock, AWS Lambda, AWS API Gateway, AWS OpenSearch Serverless, AWS
+            S3, AWS CloudFront
+          </p>
+        </div>
+        <BulletList items={CHICO_CHATBOT_BULLETS} />
       </div>
 
       <div className={contentSubsection}>
@@ -372,7 +482,9 @@ function projectsSubsections() {
           description="Full-Stack Search Engine for AI Tools"
         />
         <div className={projectMeta}>
-          <p className={projectMetaLabel}>Team Lead</p>
+          <p className={projectMetaLabel}>
+            Team Lead + Backend/Database Engineer
+          </p>
           <p>
             <span className={projectMetaLabel}>Tech stack:</span> LAMP stack,
             Flask, AWS EC2, Google Gemini
@@ -424,19 +536,19 @@ function skillsInner() {
     <div className="space-y-3 text-base leading-relaxed text-slate-600 dark:text-slate-400">
       <p>
         <span className={skillsKeyLabel}>Programming languages:</span> Python,
-        Java, JavaScript, TypeScript, Rust
+        Java, JavaScript, TypeScript
       </p>
       <p>
         <span className={skillsKeyLabel}>Databases:</span> MySQL, MongoDB,
-        PostgreSQL, Pinecone, Supabase
+        PostgreSQL, Pinecone
       </p>
       <p>
-        <span className={skillsKeyLabel}>Cloud/DevOps:</span> AWS, Azure,
-        Docker, Railway
+        <span className={skillsKeyLabel}>Cloud/DevOps:</span> AWS, Docker,
+        Railway, Vercel, Google Firebase
       </p>
       <p>
         <span className={skillsKeyLabel}>ML/AI:</span> Keras, TensorFlow,
-        PyTorch, LangGraph, LangChain, OpenCV, Hugging Face
+        PyTorch, LangGraph, LangChain, OpenCV, LangSmith
       </p>
     </div>
   );
