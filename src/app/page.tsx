@@ -16,78 +16,6 @@ const LINKS = {
   email: "mailto:jaredaungfr@gmail.com",
 } as const;
 
-const PILLARS = [
-  {
-    title: "Engineering",
-    body: "Reliable systems, APIs, and data pipelines—clarity, observability, and maintainability first.",
-    icon: CodeIcon,
-  },
-  {
-    title: "Applied AI",
-    body: "Production-minded ML: evaluation, iteration, and tight loops with the people who use the output.",
-    icon: LayersIcon,
-  },
-  {
-    title: "Data science",
-    body: "Rigorous analysis and experimentation—turning complex data into decisions teams can act on.",
-    icon: ChartIcon,
-  },
-] as const;
-
-function CodeIcon(props: { className?: string }) {
-  return (
-    <svg
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth={1.5}
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      className={props.className}
-      aria-hidden
-    >
-      <path d="m16 18 6-6-6-6M8 6l-6 6 6 6" />
-    </svg>
-  );
-}
-
-function LayersIcon(props: { className?: string }) {
-  return (
-    <svg
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth={1.5}
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      className={props.className}
-      aria-hidden
-    >
-      <path d="m12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83Z" />
-      <path d="m22 17.65-9.17 4.16a2 2 0 0 1-1.66 0L2 17.65" />
-      <path d="m22 12.65-9.17 4.16a2 2 0 0 1-1.66 0L2 12.65" />
-    </svg>
-  );
-}
-
-function ChartIcon(props: { className?: string }) {
-  return (
-    <svg
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth={1.5}
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      className={props.className}
-      aria-hidden
-    >
-      <path d="M3 3v18h18" />
-      <path d="M7 16V9M12 16v-5M17 16V6" />
-    </svg>
-  );
-}
-
 function TextLink({
   href,
   children,
@@ -131,56 +59,40 @@ export default function Home() {
           <TextLink href={LINKS.email}>Email</TextLink>
         </div>
         <SiteNav className="mt-5 md:mt-6" />
-        <div className="mt-6 md:mt-7">
-          <p className="text-lg leading-relaxed text-slate-600 dark:text-slate-400">
-            Computer Science student at San Francisco State University with
-            experience designing and delivering scalable, high-performing, and
-            user-friendly web applications from concept to production.
-          </p>
-          <p className="mt-4 text-lg leading-relaxed text-slate-600 dark:text-slate-400">
-            Experienced in Python, Java, React, FastAPI, AWS, and AI/ML, with
-            strong expertise in integrating ML models and AI systems into
-            production full-stack environments.
-          </p>
-          <p className="mt-4 text-lg leading-relaxed text-slate-600 dark:text-slate-400">
-            Adept at creating responsive and accessible user interfaces,
-            optimizing backend performance, and collaborating across teams to
-            deliver reliable user-facing applications.
-          </p>
-        </div>
+        <section aria-label="About" className="mt-8 scroll-mt-6 md:mt-10">
+          <div className={contentSectionSurface}>
+            <p className="text-xl font-bold leading-snug tracking-tight text-slate-900 sm:text-2xl dark:text-slate-100">
+              Hello, welcome to my little corner of the internet!
+            </p>
+            <div className="mt-6 space-y-4 border-t border-slate-200 pt-6 text-base leading-relaxed text-slate-600 sm:mt-7 sm:pt-7 dark:border-slate-700 dark:text-slate-400">
+              <p>
+                My name is Ye Marn Aung, but I go by Jared. I&apos;m a senior at
+                San Francisco State University, studying Computer Science and
+                Mathematics. I&apos;m currently a Teaching Assistant for a
+                Software Engineering course and previously worked as a
+                Full-Stack Engineering Intern at Develop for Good, where I
+                helped build a mobile application for Fresh Lifelines for Youth,
+                a nonprofit supporting young people impacted by the justice
+                system.
+              </p>
+              <p>
+                I&apos;m passionate about using technology and AI to solve
+                real-world problems, particularly those that can make a positive
+                difference in people&apos;s lives.
+              </p>
+              <p>
+                In my free time, I love reading fiction, playing and watching
+                soccer, chess, and movies. My favorite book is this sweet little
+                book called Last Summer of Us by Maggie Harcourt.
+              </p>
+            </div>
+          </div>
+        </section>
 
         <div
           className="mt-14 border-t-2 border-slate-400 dark:border-slate-500 sm:mt-16"
           aria-hidden
         />
-
-        <section
-          aria-labelledby="focus-heading"
-          className={`${contentSectionStack} scroll-mt-6`}
-        >
-          <div className={contentSectionSurface}>
-            <h2 id="focus-heading" className={contentSectionTitle}>
-              Focus
-            </h2>
-            <ul
-              className={`${contentSectionBody} grid gap-6 sm:grid-cols-2 sm:gap-5 lg:grid-cols-3 lg:gap-6`}
-            >
-              {PILLARS.map(({ title, body, icon: Icon }) => (
-                <li key={title} className="flex gap-4">
-                  <Icon className="mt-1 h-5 w-5 shrink-0 text-slate-400 sm:h-6 sm:w-6 dark:text-slate-500" />
-                  <div className="min-w-0">
-                    <h3 className="text-lg font-medium text-slate-900 dark:text-slate-100">
-                      {title}
-                    </h3>
-                    <p className="mt-2 text-base leading-relaxed text-slate-600 dark:text-slate-400">
-                      {body}
-                    </p>
-                  </div>
-                </li>
-              ))}
-            </ul>
-          </div>
-        </section>
 
         <HomeBackgroundSection />
 

@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import Link from "next/link";
 import {
   contentSectionBody,
   contentSectionStack,
@@ -22,6 +23,15 @@ const externalTextLinkClass =
 
 const AGENTFIELD_ISSUE_URL =
   "https://github.com/Agent-Field/agentfield/issues/104#issuecomment-4061115521";
+
+const LIBREDB_REDIS_ISSUE_URL =
+  "https://github.com/libredb/libredb-studio/issues/1453";
+const LIBREDB_REDIS_PR_URL =
+  "https://github.com/libredb/libredb-studio/pull/1608";
+const LIBREDB_DISTRIBUTION_ISSUE_URL =
+  "https://github.com/libredb/libredb-studio/issues/1120";
+const LIBREDB_DISTRIBUTION_PR_URL =
+  "https://github.com/libredb/libredb-studio/pull/1226";
 
 const CERT_DEEPL_AGENTIC_AI =
   "https://learn.deeplearning.ai/certificates/37761fb7-d8a6-4fed-b091-7bc8461f0dbe?usp=sharing";
@@ -91,9 +101,9 @@ function parseInlineBold(text: string): ReactNode {
 }
 
 const SWE_TA_BULLETS = [
-  "Mentor <b>48 undergraduate students</b> across multiple teams in designing, developing, and deploying full-stack senior capstone projects.",
-  "Lead hands-on workshops on <b>GitHub, CI/CD, AWS, and Vercel</b> to help teams ship reliable, production-ready applications.",
-  "Review student code and provide technical feedback on <b>APIs, database integration, authentication, deployment, and software engineering practices</b>.",
+  "Mentor <b>48 undergraduate students</b> across <b>8 teams</b> in planning, developing, and deploying their full-stack senior capstone projects.",
+  "Lead <b>5 hands-on technical workshops</b> on collaboration on <b>GitHub, CI/CD, AWS, Vercel, and LangChain/LangGraph</b>, helping teams adopt industry-standard technologies and development practices.",
+  "Serve as a technical liaison between <b>Niantic Spatial</b> representatives, faculty, and student teams, translating sponsor technologies and requirements into hands-on workshops and project guidance, helping <b>all 8 teams</b> integrate Niantic Spatial technologies into their projects.",
 ] as const;
 
 const DEVELOP_FOR_GOOD_BULLETS = [
@@ -201,6 +211,31 @@ function ProjectTitleWithRepo({
   );
 }
 
+const sectionMoreLinkClass =
+  "group inline-flex items-center gap-1.5 rounded-full border border-slate-300 bg-white px-3.5 py-1.5 text-sm font-medium text-slate-800 no-underline shadow-sm transition hover:border-slate-900 hover:bg-slate-900 hover:text-white hover:shadow-md active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-500 focus-visible:ring-offset-2 dark:border-slate-600 dark:bg-slate-800 dark:text-slate-100 dark:hover:border-slate-100 dark:hover:bg-slate-100 dark:hover:text-slate-900 dark:focus-visible:ring-offset-slate-900";
+
+function SectionMoreLink({ href, label }: { href: string; label: string }) {
+  return (
+    <div className="mt-6 flex w-full justify-end">
+      <Link href={href} className={sectionMoreLinkClass}>
+        {label}
+        <svg
+          viewBox="0 0 16 16"
+          aria-hidden
+          className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="1.75"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        >
+          <path d="M3 8h10M9 4l4 4-4 4" />
+        </svg>
+      </Link>
+    </div>
+  );
+}
+
 function BulletList({ items }: { items: readonly string[] }) {
   return (
     <ul className="mt-3 list-disc space-y-2 pl-5 text-base leading-relaxed text-slate-600 marker:text-slate-400 dark:text-slate-400 dark:marker:text-slate-500">
@@ -211,83 +246,83 @@ function BulletList({ items }: { items: readonly string[] }) {
   );
 }
 
-const sfsuEducationBody = (
-  <>
-    <h3 className="text-lg font-medium text-slate-900 dark:text-slate-100">
-      San Francisco State University
-    </h3>
-    <p className="mt-2 text-base leading-relaxed text-slate-600 dark:text-slate-400">
-      Bachelor of Science, Computer Science (Minor in Mathematics)
-    </p>
-    <p className="mt-2 text-base text-slate-500 dark:text-slate-500">
-      San Francisco, CA · Expected December 2026
-    </p>
-  </>
-);
+const educationEntryHeader =
+  "flex flex-col gap-1 sm:flex-row sm:flex-wrap sm:items-baseline sm:justify-between sm:gap-x-4";
 
-const codePathEducationBody = (
-  <>
-    <h3 className="text-lg font-medium text-slate-900 dark:text-slate-100">
-      CodePath
-    </h3>
-    <div className="mt-4 space-y-4">
-      <div className="rounded-lg border border-slate-200/90 bg-white/60 p-4 dark:border-slate-600/80 dark:bg-slate-900/35">
-        <p className="text-base font-medium text-slate-900 dark:text-slate-100">
-          Applications of AI Engineering
-        </p>
-        <p className="mt-1 text-base text-slate-500 dark:text-slate-500">
-          Starting June 2026
-        </p>
-      </div>
-      <div className="rounded-lg border border-slate-200/90 bg-white/60 p-4 dark:border-slate-600/80 dark:bg-slate-900/35">
-        <p className="text-base font-medium text-slate-900 dark:text-slate-100">
-          Advanced Technical Interview Prep
-        </p>
-        <p className="mt-1 text-base text-slate-500 dark:text-slate-500">
-          Starting June 2026
-        </p>
-      </div>
-    </div>
-  </>
-);
+const educationTitle =
+  "text-lg font-medium text-slate-900 dark:text-slate-100";
+
+const educationDate = "shrink-0 text-base text-slate-500 dark:text-slate-500";
+
+const educationDetail =
+  "mt-2 text-base leading-relaxed text-slate-600 dark:text-slate-400";
 
 /**
  * @param showHeading — In-card “Education” title (home); omit on `/education` where the page h1 is enough.
- * @param includeCodePath — CodePath courses + second card: only on `/education`, not on the home page.
+ * @param includeCodePath — CodePath courses: only on `/education`, not on the home page.
  */
 export function EducationPanel({
   showHeading = true,
   includeCodePath = false,
+  moreLink,
 }: {
   showHeading?: boolean;
   includeCodePath?: boolean;
+  moreLink?: { href: string; label: string };
 }) {
-  const sfsuCard = (
+  return (
     <div className={contentSectionSurface}>
       {showHeading ? (
-        <>
-          <h2 id="education-heading" className={contentSectionTitle}>
-            Education
-          </h2>
-          <div className={contentSectionBody}>{sfsuEducationBody}</div>
-        </>
-      ) : (
-        sfsuEducationBody
-      )}
-    </div>
-  );
+        <h2 id="education-heading" className={contentSectionTitle}>
+          Education
+        </h2>
+      ) : null}
+      <div
+        className={
+          showHeading ? `${contentSectionBody} space-y-10` : "space-y-10"
+        }
+      >
+        <article>
+          <header className={educationEntryHeader}>
+            <h3 className={educationTitle}>San Francisco State University</h3>
+            <p className={educationDate}>Expected December 2026</p>
+          </header>
+          <p className={educationDetail}>
+            Bachelor of Science, Computer Science (Minor in Mathematics)
+          </p>
+          <p className={educationDate + " mt-2"}>San Francisco, CA</p>
+        </article>
 
-  if (!includeCodePath) {
-    return sfsuCard;
-  }
-
-  return (
-    <>
-      {sfsuCard}
-      <div className={`${contentSectionSurface} ${contentSectionStack}`}>
-        {codePathEducationBody}
+        {includeCodePath ? (
+          <article>
+            <h3 className={educationTitle}>CodePath</h3>
+            <ul className="mt-3 list-disc space-y-2 pl-5 text-base leading-relaxed text-slate-600 marker:text-slate-400 dark:text-slate-400 dark:marker:text-slate-500">
+              <li>
+                <span className="font-medium text-slate-800 dark:text-slate-200">
+                  Applications of AI Engineering
+                </span>
+                <span className="text-slate-500 dark:text-slate-500">
+                  {" "}
+                  · July 2026 – September 2026
+                </span>
+              </li>
+              <li>
+                <span className="font-medium text-slate-800 dark:text-slate-200">
+                  AI Open Source Capstone
+                </span>
+                <span className="text-slate-500 dark:text-slate-500">
+                  {" "}
+                  · September 2026 – December 2026
+                </span>
+              </li>
+            </ul>
+          </article>
+        ) : null}
       </div>
-    </>
+      {moreLink ? (
+        <SectionMoreLink href={moreLink.href} label={moreLink.label} />
+      ) : null}
+    </div>
   );
 }
 
@@ -329,14 +364,14 @@ export function EducationCertificatesPanel() {
 
 function professionalInner() {
   return (
-    <>
+    <div className="space-y-10">
       <article>
         <header className="flex flex-col gap-1 sm:flex-row sm:flex-wrap sm:items-baseline sm:justify-between sm:gap-x-4">
           <h3 className="text-lg font-medium text-slate-900 dark:text-slate-100">
             SWE Teaching Assistant — San Francisco State University
           </h3>
           <p className="shrink-0 text-base text-slate-500 dark:text-slate-500">
-            September 2026 – Present
+            September 2026 – Current
           </p>
         </header>
         <BulletList items={SWE_TA_BULLETS} />
@@ -359,14 +394,16 @@ function professionalInner() {
         </div>
         <BulletList items={DEVELOP_FOR_GOOD_BULLETS} />
       </article>
-    </>
+    </div>
   );
 }
 
 export function ProfessionalExperiencePanel({
   showHeading = true,
+  moreLink,
 }: {
   showHeading?: boolean;
+  moreLink?: { href: string; label: string };
 }) {
   return (
     <div className={contentSectionSurface}>
@@ -378,51 +415,140 @@ export function ProfessionalExperiencePanel({
           >
             Professional Experience
           </h2>
-          <div className={`${contentSectionBody} space-y-6`}>
-            {professionalInner()}
-          </div>
+          <div className={contentSectionBody}>{professionalInner()}</div>
         </>
       ) : (
         professionalInner()
       )}
+      {moreLink ? (
+        <SectionMoreLink href={moreLink.href} label={moreLink.label} />
+      ) : null}
     </div>
   );
 }
 
-/** Open source work; shown on the Experience page (not the home Professional block). */
-export function AgentFieldOpenSourcePanel() {
+const openSourceHeading =
+  "text-lg font-medium text-slate-900 dark:text-slate-100";
+
+const openSourceBody =
+  "mt-3 text-base leading-relaxed text-slate-600 dark:text-slate-400";
+
+function OpenSourceLinks({
+  links,
+}: {
+  links: readonly { href: string; label: string }[];
+}) {
   return (
-    <div className={contentSectionSurface}>
-      <h2 className={contentSectionTitle}>Open source</h2>
-      <div className={contentSectionBody}>
-        <h3 className="text-lg font-medium text-slate-900 dark:text-slate-100">
-          AgentField — control plane
-        </h3>
-        <p className="mt-3 text-base leading-relaxed text-slate-600 dark:text-slate-400">
-          Contributed unit tests for the control plane retry handler in{" "}
-          <code className="rounded bg-slate-100 px-1.5 py-0.5 text-sm text-slate-800 dark:bg-slate-800 dark:text-slate-200">
-            retry.go
-          </code>
-          , covering successful retry submission, invalid or missing execution IDs,
-          and error response shape—keeping the handler’s behavior explicit as
-          the project grows.
-        </p>
-        <p className="mt-3 text-base leading-relaxed text-slate-600 dark:text-slate-400">
+    <p className={openSourceBody}>
+      {links.map((link, index) => (
+        <span key={link.href}>
+          {index > 0 ? <span aria-hidden> · </span> : null}
           <a
-            href={AGENTFIELD_ISSUE_URL}
+            href={link.href}
             className={externalTextLinkClass}
             rel="noopener noreferrer"
             target="_blank"
           >
-            GitHub issue #104 — thread &amp; context
+            {link.label}
           </a>
-        </p>
+        </span>
+      ))}
+    </p>
+  );
+}
+
+/** Open source work. Home shows Redis and AgentField only; Experience includes distribution. */
+export function AgentFieldOpenSourcePanel({
+  includeDistribution = true,
+  moreLink,
+}: {
+  includeDistribution?: boolean;
+  moreLink?: { href: string; label: string };
+}) {
+  return (
+    <div className={contentSectionSurface}>
+      <h2 id="open-source-heading" className={contentSectionTitle}>
+        Open source
+      </h2>
+      <div className={`${contentSectionBody} ${contentNestedStack}`}>
+        <div>
+          <h3 className={openSourceHeading}>
+            LibreDB Studio (1k + Github stars) — fix: Redis Operations Metrics Display
+          </h3>
+          <p className={openSourceBody}>
+            Fixed the Redis Admin “Run Info” action so the{" "}
+            <code className="rounded bg-slate-100 px-1.5 py-0.5 text-sm text-slate-800 dark:bg-slate-800 dark:text-slate-200">
+              INFO
+            </code>{" "}
+            reply is parsed into key:value metrics and shown in the Operations
+            tab. The count now matches those metrics, and provider, Operations
+            tab, and hook tests cover the table, including clearing it when a
+            later call returns no rows.
+          </p>
+          <OpenSourceLinks
+            links={[
+              { href: LIBREDB_REDIS_ISSUE_URL, label: "GitHub issue #1453" },
+              { href: LIBREDB_REDIS_PR_URL, label: "PR #1608" },
+            ]}
+          />
+        </div>
+
+        <div>
+          <h3 className={openSourceHeading}>
+            AgentField (2.6k + Github stars) — tests: Control Plane Test Coverage
+          </h3>
+          <p className={openSourceBody}>
+            Contributed unit tests for the control plane retry handler in{" "}
+            <code className="rounded bg-slate-100 px-1.5 py-0.5 text-sm text-slate-800 dark:bg-slate-800 dark:text-slate-200">
+              retry.go
+            </code>
+            , covering successful retry submission, invalid or missing execution
+            IDs, and error response shape—keeping the handler’s behavior
+            explicit as the project grows.
+          </p>
+          <OpenSourceLinks
+            links={[
+              {
+                href: AGENTFIELD_ISSUE_URL,
+                label: "GitHub issue #104 — thread & context",
+              },
+            ]}
+          />
+        </div>
+
+        {includeDistribution ? (
+          <div>
+            <h3 className={openSourceHeading}>
+              LibreDB Studio (1k + Github stars) — docs: Scoop Distribution Guide
+            </h3>
+            <p className={openSourceBody}>
+              Added the Scoop Extras listing to the channel inventory and
+              regenerated the channel matrix and login showcase from that
+              inventory. The README and distribution guide now include the
+              Windows install command, scoop install extras/libredb-studio.
+              Release CI still leaves Scoop updates to the bucket’s own
+              workflow.
+            </p>
+            <OpenSourceLinks
+              links={[
+                {
+                  href: LIBREDB_DISTRIBUTION_ISSUE_URL,
+                  label: "GitHub issue #1120",
+                },
+                { href: LIBREDB_DISTRIBUTION_PR_URL, label: "PR #1226" },
+              ]}
+            />
+          </div>
+        ) : null}
       </div>
+      {moreLink ? (
+        <SectionMoreLink href={moreLink.href} label={moreLink.label} />
+      ) : null}
     </div>
   );
 }
 
-function projectsSubsections() {
+function projectsSubsections(includeBoard2Board: boolean) {
   return (
     <>
       <div className={contentSubsection}>
@@ -493,26 +619,36 @@ function projectsSubsections() {
         <BulletList items={GAITORGATE_BULLETS} />
       </div>
 
-      <div className={contentSubsection}>
-        <ProjectTitleWithRepo
-          repoHref={PROJECT_REPO_LINKS.board2Board}
-          title="Board2Board"
-          description="Chess Utility Tool for Over-the-Board (OTB) Game Recognition"
-        />
-        <div className={projectMeta}>
-          <p>
-            <span className={projectMetaLabel}>Tech stack:</span> Keras, Python,
-            OpenCV, ResNet50, Scikit-learn, Matplotlib, SciPy, scikit-image,
-            TensorFlow
-          </p>
+      {includeBoard2Board ? (
+        <div className={contentSubsection}>
+          <ProjectTitleWithRepo
+            repoHref={PROJECT_REPO_LINKS.board2Board}
+            title="Board2Board"
+            description="Chess Utility Tool for Over-the-Board (OTB) Game Recognition"
+          />
+          <div className={projectMeta}>
+            <p>
+              <span className={projectMetaLabel}>Tech stack:</span> Keras,
+              Python, OpenCV, ResNet50, Scikit-learn, Matplotlib, SciPy,
+              scikit-image, TensorFlow
+            </p>
+          </div>
+          <BulletList items={BOARD2BOARD_BULLETS} />
         </div>
-        <BulletList items={BOARD2BOARD_BULLETS} />
-      </div>
+      ) : null}
     </>
   );
 }
 
-export function ProjectsPanel({ showHeading = true }: { showHeading?: boolean }) {
+export function ProjectsPanel({
+  showHeading = true,
+  includeBoard2Board = true,
+  moreLink,
+}: {
+  showHeading?: boolean;
+  includeBoard2Board?: boolean;
+  moreLink?: { href: string; label: string };
+}) {
   return (
     <div className={contentSectionSurface}>
       {showHeading ? (
@@ -521,12 +657,17 @@ export function ProjectsPanel({ showHeading = true }: { showHeading?: boolean })
             Project Experience
           </h2>
           <div className={`${contentSectionBody} ${contentNestedStack}`}>
-            {projectsSubsections()}
+            {projectsSubsections(includeBoard2Board)}
           </div>
         </>
       ) : (
-        <div className={contentNestedStack}>{projectsSubsections()}</div>
+        <div className={contentNestedStack}>
+          {projectsSubsections(includeBoard2Board)}
+        </div>
       )}
+      {moreLink ? (
+        <SectionMoreLink href={moreLink.href} label={moreLink.label} />
+      ) : null}
     </div>
   );
 }
@@ -578,21 +719,44 @@ export function HomeBackgroundSection() {
         aria-labelledby="education-heading"
         className={contentSectionStack}
       >
-        <EducationPanel showHeading />
+        <EducationPanel
+          showHeading
+          moreLink={{ href: "/education", label: "More qualifications" }}
+        />
       </section>
 
       <section
         aria-labelledby="professional-experience-heading"
         className={contentSectionStack}
       >
-        <ProfessionalExperiencePanel showHeading />
+        <ProfessionalExperiencePanel
+          showHeading
+          moreLink={{ href: "/experience", label: "More experiences" }}
+        />
       </section>
 
       <section
         aria-labelledby="project-experience-heading"
         className={contentSectionStack}
       >
-        <ProjectsPanel showHeading />
+        <ProjectsPanel
+          showHeading
+          includeBoard2Board={false}
+          moreLink={{ href: "/projects", label: "More projects" }}
+        />
+      </section>
+
+      <section
+        aria-labelledby="open-source-heading"
+        className={contentSectionStack}
+      >
+        <AgentFieldOpenSourcePanel
+          includeDistribution={false}
+          moreLink={{
+            href: "/experience#open-source-heading",
+            label: "More contributions",
+          }}
+        />
       </section>
 
       <section aria-labelledby="skills-heading" className={contentSectionStack}>
